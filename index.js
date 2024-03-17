@@ -3,14 +3,13 @@ const connectDB = require("./db");
 
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
-const forgotPasswordRouter = require("./routes/forgotPassword.js");
 
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-// frontend connect to the backend
+// Allow requests from localhost:3000
 const cors = require("cors");
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
 // Connect to MongoDB
 connectDB();
@@ -24,7 +23,7 @@ app.use("/auth", authRoutes);
 // Define user routes
 app.use("/user", userRoutes);
 
-// app.use("/api/forgotPassword", forgotPasswordRouter);
+// app.use("/forgotpassword", forgotPasswordRouter);
 
 // Start the server
 app.listen(PORT, () => {
