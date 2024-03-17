@@ -23,7 +23,11 @@ app.use("/auth", authRoutes);
 // Define user routes
 app.use("/user", userRoutes);
 
-// app.use("/forgotpassword", forgotPasswordRouter);
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
 
 // Start the server
 app.listen(PORT, () => {
